@@ -4,30 +4,38 @@ import (
 	"fmt"
 	"net/http"
 	"os"
+	"strings"
 	"time"
 )
 
 var counter int
+var urls []string
 
-func sendRequest() {
-	url := os.Getenv("URL")
-
+func sendRequest(url string) {
 	fmt.Printf("[%d] Sending request to %s\n", counter, url)
 
 	_, err := http.Get(url)
 	if err != nil {
 		fmt.Printf("[%d] Error: %s\n", counter, err)
-		fmt.Println()
 		return
 	}
 
 	fmt.Printf("[%d] Sent\n", counter)
 }
 
+func sendRequests() {
+	for _, url := range urls {
+		go sendRequest(url)
+	}
+}
+
 func main() {
 	InitEnv()
 
-	go sendRequest()
+	urls = strings.Split(os.Getenv("URLS"), "|")
+
+	// this line makes requests without waiting first interval
+	sendRequests()
 
 	interval, err := time.ParseDuration(os.Getenv("INTERVAL"))
 	if err != nil {
@@ -38,6 +46,6 @@ func main() {
 
 	for range c {
 		counter++
-		go sendRequest()
+		sendRequests()
 	}
 }
