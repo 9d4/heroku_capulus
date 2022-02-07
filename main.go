@@ -6,14 +6,12 @@ import (
 	"time"
 )
 
-var interval int = 3 // seconds
-var url string = "http://192.168.0.90:9000/"
-var counter int = 0
+var counter int
 
 func sendRequest() {
-	fmt.Printf("[%d] Sending request to %s\n", counter, url)
+	fmt.Printf("[%d] Sending request to %s\n", counter, Config.Url)
 
-	_, err := http.Get(url)
+	_, err := http.Get(Config.Url)
 	if err != nil {
 		fmt.Printf("[%d] Error: %s\n", counter, err)
 		fmt.Println()
@@ -24,9 +22,11 @@ func sendRequest() {
 }
 
 func main() {
+	InitConfig()
+
 	go sendRequest()
 
-	c := time.Tick(time.Duration(interval) * time.Second)
+	c := time.Tick(time.Duration(Config.Interval) * time.Second)
 
 	for range c {
 		counter++
