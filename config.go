@@ -6,6 +6,7 @@ import (
 	"path/filepath"
 	"runtime"
 
+	"github.com/joho/godotenv"
 	"github.com/tkanos/gonfig"
 )
 
@@ -21,6 +22,13 @@ func InitConfig() {
 
 	Config = &configuration{}
 	err := gonfig.GetConf(getFileName(), Config)
+	if err != nil {
+		panic(err)
+	}
+}
+
+func InitEnv() {
+	err := godotenv.Load()
 	if err != nil {
 		panic(err)
 	}
