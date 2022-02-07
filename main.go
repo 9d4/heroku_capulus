@@ -28,7 +28,7 @@ func main() {
 
 	c := time.Tick(time.Duration(interval) * time.Second)
 
-	for _ = range c {
+	for range c {
 		counter++
 		go sendRequest()
 	}
