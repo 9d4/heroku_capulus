@@ -1,4 +1,4 @@
-module github.com/traperwaze/heroku_caller
+module github.com/traperwaze/heroku_capulus
 
 go 1.17
 
