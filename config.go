@@ -28,7 +28,7 @@ func InitConfig() {
 }
 
 func InitEnv() {
-	err := godotenv.Load()
+	godotenv.Load()
 }
 
 func getFileName() string {
