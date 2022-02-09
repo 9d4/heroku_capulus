@@ -30,6 +30,10 @@ func sendRequests() {
 }
 
 func main() {
+	// print pwd
+	dir, _ := os.Getwd()
+	fmt.Println(dir)
+
 	InitEnv()
 
 	urlsEnv := strings.Trim(os.Getenv("URLS"), " ")
