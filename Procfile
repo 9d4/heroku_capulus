@@ -1,1 +1,1 @@
-worker: bin/heroku-capulus
+worker: bin/heroku_capulus
