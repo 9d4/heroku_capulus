@@ -20,7 +20,7 @@ func sendRequest(url string) {
 		return
 	}
 
-	fmt.Printf("[%d] Sent\n", counter)
+	fmt.Printf("[%d] Sent to %s\n", counter, url)
 }
 
 func sendRequests() {
