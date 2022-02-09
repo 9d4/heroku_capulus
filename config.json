@@ -1,4 +1,4 @@
 {
-    "interval": 600,
-    "url": "https://waifuseum.herokuapp.com"
+    "interval": "10m",
+    "urls": "https://waifuseum.herokuapp.com|https://google.com"
 }

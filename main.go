@@ -30,13 +30,12 @@ func sendRequests() {
 }
 
 func main() {
-	InitEnv()
 	InitConfig()
 
-	urlsEnv := strings.Trim(os.Getenv("URLS"), " ")
+	urlsEnv := strings.Trim(Config.Urls, " ")
 
 	if urlsEnv == "" {
-		fmt.Println("URLS environment variable is not set")
+		fmt.Println("URLS config is not set")
 		os.Exit(1)
 	}
 
@@ -45,9 +44,9 @@ func main() {
 	// this line makes requests without waiting first interval
 	sendRequests()
 
-	interval, err := time.ParseDuration(os.Getenv("INTERVAL"))
+	interval, err := time.ParseDuration(Config.Interval)
 	if err != nil {
-		panic("Error parsing interval. Change it in .env")
+		panic("Error parsing interval. Change it in config.json. e.g 1m, 1h10m, 10s, etc.")
 	}
 
 	c := time.Tick(interval)
