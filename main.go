@@ -7,7 +7,6 @@ import (
 )
 
 var counter int
-var urls []string
 
 func sendRequest(url string) {
 	fmt.Printf("[%d] Sending request to %s\n", counter, url)
@@ -22,15 +21,13 @@ func sendRequest(url string) {
 }
 
 func sendRequests() {
-	for _, url := range urls {
+	for _, url := range Config.Urls {
 		go sendRequest(url)
 	}
 }
 
 func main() {
 	InitConfig()
-
-	urls = Config.Urls
 
 	// this line makes requests without waiting first interval
 	sendRequests()

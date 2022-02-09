@@ -23,6 +23,9 @@ func InitConfig() {
 	if err != nil {
 		panic(err)
 	}
+
+	// check is urls are empty, then panic
+	checkUrls()
 }
 
 func getFileName() string {
@@ -36,4 +39,10 @@ func getFileName() string {
 	filepath := path.Join(dirname, filename)
 
 	return filepath
+}
+
+func checkUrls() {
+	if len(Config.Urls) == 0 {
+		panic("Urls are empty")
+	}
 }
