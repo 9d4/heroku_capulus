@@ -35,6 +35,7 @@ func main() {
 	fmt.Println(dir)
 
 	InitEnv()
+	InitConfig()
 
 	urlsEnv := strings.Trim(os.Getenv("URLS"), " ")
 
