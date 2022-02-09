@@ -32,7 +32,14 @@ func sendRequests() {
 func main() {
 	InitEnv()
 
-	urls = strings.Split(os.Getenv("URLS"), "|")
+	urlsEnv := strings.Trim(os.Getenv("URLS"), " ")
+
+	if urlsEnv == "" {
+		fmt.Println("URLS environment variable is not set")
+		os.Exit(1)
+	}
+
+	urls = strings.Split(urlsEnv, "|")
 
 	// this line makes requests without waiting first interval
 	sendRequests()
