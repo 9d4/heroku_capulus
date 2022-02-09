@@ -2,9 +2,8 @@ package main
 
 import (
 	"fmt"
+	"os"
 	"path"
-	"path/filepath"
-	"runtime"
 
 	"github.com/joho/godotenv"
 	"github.com/tkanos/gonfig"
@@ -18,7 +17,7 @@ type configuration struct {
 var Config *configuration
 
 func InitConfig() {
-	fmt.Println(getFileName())
+	fmt.Println("[config path]",getFileName())
 
 	Config = &configuration{}
 	err := gonfig.GetConf(getFileName(), Config)
@@ -34,8 +33,12 @@ func InitEnv() {
 func getFileName() string {
 	filename := "config.json"
 
-	_, dirname, _, _ := runtime.Caller(0)
-	filepath := path.Join(filepath.Dir(dirname), filename)
+	dirname, err := os.Getwd()
+	if err != nil {
+		panic("error getting pwd")
+	}
+
+	filepath := path.Join(dirname, filename)
 
 	return filepath
 }
