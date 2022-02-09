@@ -3,8 +3,6 @@ package main
 import (
 	"fmt"
 	"net/http"
-	"os"
-	"strings"
 	"time"
 )
 
@@ -32,14 +30,7 @@ func sendRequests() {
 func main() {
 	InitConfig()
 
-	urlsEnv := strings.Trim(Config.Urls, " ")
-
-	if urlsEnv == "" {
-		fmt.Println("URLS config is not set")
-		os.Exit(1)
-	}
-
-	urls = strings.Split(urlsEnv, "|")
+	urls = Config.Urls
 
 	// this line makes requests without waiting first interval
 	sendRequests()

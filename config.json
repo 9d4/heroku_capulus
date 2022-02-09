@@ -1,4 +1,7 @@
 {
     "interval": "10m",
-    "urls": "https://waifuseum.herokuapp.com|https://google.com"
+    "urls": [
+        "https://waifuseum.herokuapp.com",
+        "https://buzzyapp.herokuapp.com"
+    ]
 }

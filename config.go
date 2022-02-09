@@ -10,7 +10,7 @@ import (
 
 type configuration struct {
 	Interval string
-	Urls     string
+	Urls     []string
 }
 
 var Config *configuration
