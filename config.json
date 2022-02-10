@@ -1,7 +1,7 @@
 {
     "interval": "10m",
     "urls": [
-        "https://google.com",
-        "https://ask.com",
+        "https://waifuseum.herokuapp.com",
+        "https://buzzyapp.herokuapp.com"
     ]
 }
