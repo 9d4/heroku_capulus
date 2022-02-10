@@ -30,13 +30,13 @@ func main() {
 func sendRequest(url string) {
 	fmt.Printf("[%d] Sending request to %s\n", counter, url)
 
-	_, err := http.Get(url)
+	res, err := http.Head(url)
 	if err != nil {
 		fmt.Printf("[%d] Error: %s\n", counter, err)
 		return
 	}
 
-	fmt.Printf("[%d] Sent to %s\n", counter, url)
+	fmt.Printf("[%d] Sent to %s. status:%d\n", counter, url, res.StatusCode)
 }
 
 func sendRequests() {
