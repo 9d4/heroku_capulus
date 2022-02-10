@@ -1,3 +1,5 @@
+// +heroku goVersion 1.17
+
 module github.com/traperwaze/heroku_capulus
 
 go 1.17
