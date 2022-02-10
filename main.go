@@ -8,24 +8,6 @@ import (
 
 var counter int
 
-func sendRequest(url string) {
-	fmt.Printf("[%d] Sending request to %s\n", counter, url)
-
-	_, err := http.Get(url)
-	if err != nil {
-		fmt.Printf("[%d] Error: %s\n", counter, err)
-		return
-	}
-
-	fmt.Printf("[%d] Sent to %s\n", counter, url)
-}
-
-func sendRequests() {
-	for _, url := range Config.Urls {
-		go sendRequest(url)
-	}
-}
-
 func main() {
 	InitConfig()
 
@@ -42,5 +24,23 @@ func main() {
 	for range c {
 		counter++
 		sendRequests()
+	}
+}
+
+func sendRequest(url string) {
+	fmt.Printf("[%d] Sending request to %s\n", counter, url)
+
+	res, err := http.Head(url)
+	if err != nil {
+		fmt.Printf("[%d] Error: %s\n", counter, err)
+		return
+	}
+
+	fmt.Printf("[%d] Sent to %s. status:%d\n", counter, url, res.StatusCode)
+}
+
+func sendRequests() {
+	for _, url := range Config.Urls {
+		go sendRequest(url)
 	}
 }
