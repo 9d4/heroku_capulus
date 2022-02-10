@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"os"
 	"path"
 
@@ -14,35 +15,38 @@ type configuration struct {
 }
 
 var Config *configuration
+var filename string = "config.json"
 
 func InitConfig() {
 	fmt.Println("[config path]", getFileName())
 
 	Config = &configuration{}
+	
 	err := gonfig.GetConf(getFileName(), Config)
 	if err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
 
-	// check is urls are empty, then panic
-	checkUrls()
+	if urlsEmpty() {
+		log.Fatal("[config error] urls is empty")
+	}
 }
 
 func getFileName() string {
-	filename := "config.json"
-
-	dirname, err := os.Getwd()
-	if err != nil {
-		panic("error getting pwd")
-	}
-
-	filepath := path.Join(dirname, filename)
+	filepath := path.Join(wd(), filename)
 
 	return filepath
 }
 
-func checkUrls() {
-	if len(Config.Urls) == 0 {
-		panic("Urls are empty")
+func urlsEmpty() bool {
+	return len(Config.Urls) == 0
+}
+
+func wd() string {
+	p, err := os.Getwd()
+	if err != nil {
+		log.Fatal(err)
 	}
+
+	return p
 }
