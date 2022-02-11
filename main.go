@@ -4,14 +4,16 @@ import (
 	"fmt"
 	"net/http"
 	"time"
+
+	"github.com/traperwaze/heroku_capulus/config"
 )
 
 var counter int
 
 func main() {
-	InitConfig()
+	config.InitConfig()
 
-	interval, err := time.ParseDuration(Config.Interval)
+	interval, err := time.ParseDuration(config.Config.Interval)
 	if err != nil {
 		panic("Error parsing interval. Change it in config.json. e.g 1m, 1h10m, 10s, etc.")
 	}
@@ -44,7 +46,7 @@ func sendRequest(url string, count int) {
 }
 
 func sendRequests() {
-	for _, url := range Config.Urls {
+	for _, url := range config.Config.Urls {
 		go sendRequest(url, counter)
 	}
 }
