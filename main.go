@@ -6,12 +6,16 @@ import (
 	"time"
 
 	"github.com/traperwaze/heroku_capulus/config"
+	"github.com/traperwaze/heroku_capulus/ntp"
 )
 
 var counter int
+var ntpTime time.Time
 
 func main() {
-	config.InitConfig()
+	ntpTime := ntp.GetTime()
+	fmt.Println(ntpTime)
+
 
 	interval, err := time.ParseDuration(config.Config.Interval)
 	if err != nil {

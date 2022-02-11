@@ -3,5 +3,6 @@
     "urls": [
         "https://waifuseum.herokuapp.com",
         "https://buzzyapp.herokuapp.com"
-    ]
+    ],
+    "ntpServer": "0.id.pool.ntp.org:123"
 }

@@ -1,7 +1,6 @@
 package config
 
 import (
-	"fmt"
 	"log"
 	"os"
 	"path"
@@ -10,18 +9,21 @@ import (
 )
 
 type configuration struct {
-	Interval string
-	Urls     []string
+	Interval  string
+	Urls      []string
+	NtpServer string
 }
 
 var Config *configuration
 var filename string = "config.json"
 
-func InitConfig() {
-	fmt.Println("[config path]", getFileName())
+func init() {
+	InitConfig()
+}
 
+func InitConfig() {
 	Config = &configuration{}
-	
+
 	err := gonfig.GetConf(getFileName(), Config)
 	if err != nil {
 		log.Fatal(err)
