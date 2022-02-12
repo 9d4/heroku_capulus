@@ -2,21 +2,18 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"net/http"
+	"strconv"
+	"strings"
 	"time"
 
 	"github.com/traperwaze/heroku_capulus/config"
-	"github.com/traperwaze/heroku_capulus/ntp"
 )
 
 var counter int
-var ntpTime time.Time
 
 func main() {
-	ntpTime := ntp.GetTime()
-	fmt.Println(ntpTime)
-
-
 	interval, err := time.ParseDuration(config.Config.Interval)
 	if err != nil {
 		panic("Error parsing interval. Change it in config.json. e.g 1m, 1h10m, 10s, etc.")
@@ -51,6 +48,49 @@ func sendRequest(url string, count int) {
 
 func sendRequests() {
 	for _, url := range config.Config.Urls {
-		go sendRequest(url, counter)
+		if !isPaused() {
+			go sendRequest(url, counter)
+		}
 	}
+}
+
+func isPaused() bool {
+	tz, err := time.LoadLocation(config.Config.Timezone)
+	if err != nil {
+		log.Fatal("Error loading timezone:", err)
+	}
+
+	now := time.Now().In(tz)
+
+	startAt := strings.Split(strings.Trim(config.Config.StartAt, " "), ":")
+	stopAt := strings.Split(strings.Trim(config.Config.StopAt, " "), ":")
+
+	startHour, err := strconv.ParseInt(startAt[0], 10, 64)
+	if err != nil {
+		yieldErrorParseTime(err)
+	}
+
+	startMinute, err := strconv.ParseInt(startAt[1], 10, 64)
+	if err != nil {
+		yieldErrorParseTime(err)
+	}
+
+	stopHour, err := strconv.ParseInt(stopAt[0], 10, 64)
+	if err != nil {
+		yieldErrorParseTime(err)
+	}
+
+	stopMinute, err := strconv.ParseInt(stopAt[1], 10, 64)
+	if err != nil {
+		yieldErrorParseTime(err)
+	}
+
+	afterStart := now.Hour() >= int(startHour) || now.Minute() >= int(startMinute)
+	beforeStop := now.Hour() <= int(stopHour) || now.Minute() < int(stopMinute)
+
+	return !(afterStart && beforeStop)
+}
+
+func yieldErrorParseTime(err error) {
+	log.Fatal("error parsing time", err)
 }
