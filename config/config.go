@@ -11,7 +11,6 @@ import (
 type configuration struct {
 	Interval  string
 	Urls      []string
-	NtpServer string
 	Timezone  string
 	StartAt   string
 	StopAt    string
