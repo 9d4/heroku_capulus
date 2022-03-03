@@ -8,7 +8,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/traperwaze/heroku_capulus/config"
+	"github.com/9d4/heroku_capulus/config"
 )
 
 var counter int
