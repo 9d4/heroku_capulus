@@ -4,7 +4,6 @@
         "https://waifuseum.herokuapp.com",
         "https://buzzyapp.herokuapp.com"
     ],
-    "ntpServer": "0.id.pool.ntp.org:123",
     "timezone": "Asia/Jakarta",
     "startAt": "06:00",
     "stopAt": "19:00"
