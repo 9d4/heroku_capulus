@@ -25,19 +25,14 @@ The configuration file should at least look like below.
 }
 ```
 
-#### interval
-Interval is gap between request. How long it should wait before next request.
+- **interval** is gap between request. How long it should wait before next request.
 e.g. `10m`, `1h10m`, `15m`, `1h10m15s`
 
-#### urls
-List of urls to be requested.
+- **urls** List of urls to be requested.
 
-#### timezone
-The timezeone that used by `startAt` and `stopAt`
+- **timezone** is the timezeone that used by `startAt` and `stopAt`
 
-#### startAt & stopAt
-The tool will only run between the `startAt` and `stopAt`. Use 24 hour format.
-
+- **startAt & stopAt** The tool will only run between the `startAt` and `stopAt`. Use 24 hour format.
 
 # Dev
 
