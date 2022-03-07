@@ -1,8 +1,7 @@
 {
-    "interval": "10m",
+    "interval": "4m",
     "urls": [
-        "https://waifuseum.herokuapp.com",
-        "https://buzzyapp.herokuapp.com"
+        "https://waifuseum.my.id",
     ],
     "timezone": "Asia/Jakarta",
     "startAt": "06:00",
