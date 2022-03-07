@@ -1,5 +1,5 @@
 {
-    "interval": "4m",
+    "interval": "2.5m",
     "urls": [
         "https://api.waifuseum.my.id/"
     ],
