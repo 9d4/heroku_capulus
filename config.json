@@ -1,7 +1,7 @@
 {
     "interval": "4m",
     "urls": [
-        "https://api.waifuseum.my.id/",
+        "https://api.waifuseum.my.id/"
     ],
     "timezone": "Asia/Jakarta",
     "startAt": "06:00",
