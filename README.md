@@ -21,18 +21,23 @@ The configuration file should at least look like below.
     ],
     "timezone": "Asia/Jakarta",
     "startAt": "06:00",
-    "stopAt": "19:00"
+    "stopAt": "19:00",
+    "alwaysOn": false
 }
 ```
 
 - **interval** is gap between request. How long it should wait before next request.
-e.g. `10m`, `1h10m`, `15m`, `1h10m15s`
+e.g. `10m`, `1h10m`, `15m`, `1h10m15s`.
 
 - **urls** List of urls to be requested.
 
-- **timezone** is the timezeone that used by `startAt` and `stopAt`
+- **timezone** is the timezeone that used by `startAt` and `stopAt`.
 
 - **startAt & stopAt** The tool will only run between the `startAt` and `stopAt`. Use 24 hour format.
+
+- **alwaysOn** (optional) If alwaysOn option is set to true, the app will always run regardless the startAt and stopAt. alwaysOn option overrides the startAt and stopAt.
+
+Once you have config set, you can just execute the binary file.
 
 # Dev
 

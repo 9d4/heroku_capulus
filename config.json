@@ -6,5 +6,5 @@
     "timezone": "Asia/Jakarta",
     "startAt": "06:00",
     "stopAt": "19:00",
-    "alwaysOn": true
+    "alwaysOn": false
 }
