@@ -12,6 +12,7 @@ type configuration struct {
 	Interval  string
 	Urls      []string
 	Timezone  string
+	AlwaysOn  bool
 	StartAt   string
 	StopAt    string
 }

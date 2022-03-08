@@ -48,7 +48,7 @@ func sendRequest(url string, count int) {
 
 func sendRequests() {
 	for _, url := range config.Config.Urls {
-		if !isPaused() {
+		if isAlwaysOnMode() || !isPaused() {
 			go sendRequest(url, counter)
 		}
 	}
@@ -93,4 +93,8 @@ func isPaused() bool {
 
 func yieldErrorParseTime(err error) {
 	log.Fatal("error parsing time", err)
+}
+
+func isAlwaysOnMode() bool {
+	return config.Config.AlwaysOn
 }
