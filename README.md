@@ -1,10 +1,10 @@
-# heroku_capulus
+# Heroku Capulus
 
-![Deploy](https://github.com/traperwaze/heroku_capulus/workflows/Deploy/badge.svg)
+[![Heroku Deploy](https://github.com/9d4/heroku_capulus/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/9d4/heroku_capulus/actions/workflows/main.yml)
 
 A cli tool to make request to heroku or any server in an interval.
 
-# Usage
+## Usage
 
 Download the binary in [here](https://github.com/9d4/heroku_capulus/releases) based on your platform.
 The configuration file is needed to run the binary. Put the config file in the same directory with the binary.
@@ -39,7 +39,7 @@ e.g. `10m`, `1h10m`, `15m`, `1h10m15s`.
 
 Once you have config set, you can just execute the binary file.
 
-# Dev
+## Dev
 
 Install dependencies:
 
