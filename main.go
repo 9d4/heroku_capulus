@@ -14,24 +14,21 @@ import (
 var counter int
 
 func main() {
-	interval, err := time.ParseDuration(config.Config.Interval)
-	if err != nil {
-		panic("Error parsing interval. Change it in config.json. e.g 1m, 1h10m, 10s, etc.")
-	}
+	// c := time.Tick(interval)
 
-	c := time.Tick(interval)
+	// go func() {
+	// 	// this line makes requests without waiting first interval
+	// 	sendRequests()
 
-	go func() {
-		// this line makes requests without waiting first interval
-		sendRequests()
+	// 	for range c {
+	// 		counter++
+	// 		sendRequests()
+	// 	}
+	// }()
 
-		for range c {
-			counter++
-			sendRequests()
-		}
-	}()
-
+	go reqAll()
 	select {}
+
 }
 
 func sendRequest(url string, count int) {
