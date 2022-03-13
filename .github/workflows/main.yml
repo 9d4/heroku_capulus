@@ -1,4 +1,4 @@
-name: Deploy
+name: Heroku Deploy
 
 on:
   push:
@@ -13,6 +13,6 @@ jobs:
       - uses: akhileshns/heroku-deploy@v3.12.12
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: 'heroku-capulus'
-          heroku_email: 'dev.bayudc@gmail.com'
+          heroku_app_name: 'traper-heroku-capulus'
+          heroku_email: 'traperwaze@gmail.com'
           buildpack: https://github.com/heroku/heroku-buildpack-go.git
