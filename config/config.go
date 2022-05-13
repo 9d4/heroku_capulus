@@ -21,10 +21,6 @@ var Config *configuration
 var filename string = "config.json"
 
 func init() {
-	InitConfig()
-}
-
-func InitConfig() {
 	Config = &configuration{}
 
 	err := gonfig.GetConf(getFileName(), Config)
