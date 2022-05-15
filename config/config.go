@@ -1,11 +1,12 @@
 package config
 
 import (
-	"bufio"
+	"io/ioutil"
 	"log"
 	"os"
 	"path"
 
+	"github.com/pelletier/go-toml/v2"
 	"github.com/tkanos/gonfig"
 )
 
@@ -28,9 +29,13 @@ func init() {
 
 	Config = new(configuration)
 
-	err := gonfig.GetConf(getFileName(), Config)
-	if err != nil {
-		log.Fatal(err)
+	if err := initConfigToml(Config); err != nil {
+		log.Println("Using config.json")
+
+		err := gonfig.GetConf(getFileName(), Config)
+		if err != nil {
+			log.Fatal(err)
+		}
 	}
 
 	if urlsEmpty() {
@@ -38,18 +43,24 @@ func init() {
 	}
 }
 
-func initConfigToml() {
+func initConfigToml(cfg *configuration) error {
 	path := path.Join(wd(), "config.toml")
-	file, err := os.OpenFile(path, os.O_RDONLY, os.ModePerm)
+	file, err := os.Open(path)
 	if err != nil {
-		println(err)
+		return err
 	}
 
-	buf := bufio.NewScanner(file)
-
-	for buf.Scan() {
-		print(buf.Bytes())
+	doc,err := ioutil.ReadAll(file)
+	if err != nil {
+		return err
 	}
+
+	err = toml.Unmarshal(doc, cfg)
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
 
 func getFileName() string {
