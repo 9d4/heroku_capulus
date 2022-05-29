@@ -1,0 +1,6 @@
+interval = "1s"
+urls = ["https://google.com"]
+timezone = "Asia/Jakarta"
+startAt = "06:00"
+stopAt = "19:00"
+alwaysOn = false
