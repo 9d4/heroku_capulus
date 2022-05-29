@@ -1,6 +1,7 @@
 package config
 
 import (
+	"bufio"
 	"log"
 	"os"
 	"path"
@@ -21,11 +22,11 @@ var Config *configuration
 var filename string = "config.json"
 
 func init() {
-	InitConfig()
-}
+	if Config != nil {
+		return
+	}
 
-func InitConfig() {
-	Config = &configuration{}
+	Config = new(configuration)
 
 	err := gonfig.GetConf(getFileName(), Config)
 	if err != nil {
@@ -34,6 +35,20 @@ func InitConfig() {
 
 	if urlsEmpty() {
 		log.Fatal("[config error] urls is empty")
+	}
+}
+
+func initConfigToml() {
+	path := path.Join(wd(), "config.toml")
+	file, err := os.OpenFile(path, os.O_RDONLY, os.ModePerm)
+	if err != nil {
+		println(err)
+	}
+
+	buf := bufio.NewScanner(file)
+
+	for buf.Scan() {
+		print(buf.Bytes())
 	}
 }
 
