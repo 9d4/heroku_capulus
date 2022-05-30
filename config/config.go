@@ -29,14 +29,15 @@ func init() {
 
 	Config = new(configuration)
 
-	if err := initConfigToml(Config); err != nil {
-		log.Println("Using config.json")
-
-		err := gonfig.GetConf(getFileName(), Config)
-		if err != nil {
-			log.Fatal(err)
-		}
+	err := initConfigToml(Config)
+	if err != nil {
+		err = initConfigJson(Config)
 	}
+
+	if err != nil {
+		log.Fatal("[config error] no valid config found")
+	}
+
 
 	if urlsEmpty() {
 		log.Fatal("[config error] urls is empty")
@@ -61,6 +62,11 @@ func initConfigToml(cfg *configuration) error {
 	}
 
 	return nil
+}
+
+func initConfigJson(cfg *configuration) error {
+	err := gonfig.GetConf(getFileName(), cfg)
+	return err
 }
 
 func getFileName() string {
