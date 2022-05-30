@@ -26,6 +26,19 @@ The configuration file should at least look like below.
 }
 ```
 
+Or in toml `config.toml`. 
+
+```toml
+interval = "10m"
+urls = ["https://google.com"]
+timezone = "Asia/Jakarta"
+startAt = "06:00"
+stopAt = "19:00"
+alwaysOn = false
+```
+
+Details:
+
 - **interval** is gap between request. How long it should wait before next request.
 e.g. `10m`, `1h10m`, `15m`, `1h10m15s`.
 
@@ -38,6 +51,8 @@ e.g. `10m`, `1h10m`, `15m`, `1h10m15s`.
 - **alwaysOn** (optional) If alwaysOn option is set to true, the app will always run regardless the startAt and stopAt. alwaysOn option overrides the startAt and stopAt.
 
 Once you have config set, you can just execute the binary file.
+
+**Note:** the program prioritize the config.toml before config.json.
 
 ## Dev
 
